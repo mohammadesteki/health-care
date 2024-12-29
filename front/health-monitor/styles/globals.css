@@ -1,0 +1,30 @@
+@import './reset.css';
+@import './map.css';
+
+html {
+  font-family: Tahoma, Serif, "Roboto Light", serif;
+  /*background: #111111;*/
+  /*color: #ffffff;*/
+}
+
+div#__next, main#__main {
+  margin: 0;
+  padding: 0;
+  position: fixed !important; /* must be fixed in order for map layout to work correctly */
+  top: 0;
+  bottom: 0;
+  left: 0;
+  right: 0;
+}
+
+::-webkit-scrollbar {
+  display: none;
+}
+
+input, textarea, button, select, a {
+  -webkit-tap-highlight-color: rgba(0, 0, 0, 0);
+}
+
+button:hover {
+  cursor: pointer;
+}

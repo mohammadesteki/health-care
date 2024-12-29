@@ -1,0 +1,41 @@
+{
+  "name": "health-monitor",
+  "version": "0.1.0",
+  "private": true,
+  "scripts": {
+    "dev": "next dev -p 5200",
+    "build": "next build",
+    "start": "next start -p 5200",
+    "lint": "next lint"
+  },
+  "dependencies": {
+    "@emotion/cache": "^11.13.5",
+    "@emotion/react": "^11.13.5",
+    "@emotion/server": "^11.11.0",
+    "@emotion/styled": "11.13.5",
+    "@mui/icons-material": "5.15.10",
+    "@mui/material": "5.15.10",
+    "@mui/material-nextjs": "^6.1.8",
+    "next": "15.0.3",
+    "react": "18.3.1",
+    "react-dom": "18.3.1",
+    "react-query": "3.39.0",
+    "mapbox-gl": "1.13.2",
+    "react-mapbox-gl": "5.1.1",
+    "chart.js": "4.4.6",
+    "date-fns": "4.1.0",
+    "chartjs-adapter-date-fns": "3.0.0",
+    "@sentisso/react-modern-calendar-datepicker":  "3.1.9",
+    "@mui/x-date-pickers": "7.23.0",
+    "dayjs":  "1.11.13"
+  },
+  "devDependencies": {
+    "@types/mapbox-gl": "~1.5.0",
+    "@types/node": "22.9.1",
+    "@types/react": "18.3.12",
+    "@types/react-dom": "18.3.1",
+    "eslint": "9.15.0",
+    "eslint-config-next": "15.0.3",
+    "typescript": "5.6.3"
+  }
+}
