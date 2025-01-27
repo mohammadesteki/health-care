@@ -5,11 +5,9 @@ def handle_client(client_socket):
     """Handles client communication."""
     with client_socket:
         print("Connection established.")
-        client_socket.send(b"Welcome to the Django TCP service!")
         data = client_socket.recv(1024)
         if data:
             print(f"Received: {data.decode()}")
-        client_socket.send(b"Goodbye!\n")
 
 def start_tcp_server(host='0.0.0.0', port=1234):
     """Starts the TCP server."""
