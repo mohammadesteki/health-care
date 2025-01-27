@@ -10,6 +10,7 @@ def handle_client(client_socket):
         data = client_socket.recv(1048576)
         if data:
             print(data)
+            print(len(data))
             print(f"Received: {data.decode()}")
             print(json.load(data.decode()))
             if json.load(data.decode()).has_key("has_fallen"):
