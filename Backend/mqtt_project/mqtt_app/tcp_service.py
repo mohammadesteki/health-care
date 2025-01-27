@@ -12,8 +12,9 @@ def handle_client(client_socket):
             print(data)
             print(len(data))
             print(f"Received: {data.decode()}")
-            print(json.load(data.decode()))
-            if json.load(data.decode()).has_key("has_fallen"):
+            json_data = json.loads(str(data.decode()))
+            print(json_data)
+            if json_data.has_key("has_fallen"):
                 handel_acl_message()
 
             else:
