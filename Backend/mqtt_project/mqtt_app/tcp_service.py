@@ -5,20 +5,23 @@ from datetime import datetime
 
 def handle_client(client_socket):
     """Handles client communication."""
-    with client_socket:
-        print("Connection established.")
-        data = client_socket.recv(1048576)
-        if data:
-            print(data)
-            print(len(data))
-            print(f"Received: {data.decode()}")
-            json_data = json.loads(str(data.decode()))
-            print(json_data)
-            if "has_fallen" in json_data:
-                handel_acl_message()
+    try:
+        with client_socket:
+            print("Connection established.")
+            data = client_socket.recv(1048576)
+            if data:
+                print(data)
+                print(len(data))
+                print(f"Received: {data.decode()}")
+                json_data = json.loads(str(data.decode()))
+                print(json_data)
+                if "has_fallen" in json_data:
+                    handel_acl_message()
 
-            else:
-                handle_ecg_message(json.loads(data.decode())["ecg_record"])
+                else:
+                    handle_ecg_message(json.loads(data.decode())["ecg_record"])
+    except Exception as e:
+        print(f"An error occurred: {e}")
 
 def start_tcp_server(host='0.0.0.0', port=1234):
     """Starts the TCP server."""
