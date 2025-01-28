@@ -12,14 +12,17 @@ def handle_client(client_socket):
             if data:
                 print(data)
                 print(len(data))
-                print(f"Received: {data.decode()}")
-                json_data = json.loads(str(data.decode()))
+                print(f"Received: {data.decode('utf-8')}")
+                json_data = json.loads(str(data.decode('utf-8')))
                 print(json_data)
                 if "has_fallen" in json_data:
                     handel_acl_message()
 
+                elif "location" in json_data:
+                    handle_gps_message(json_data["location"])
+
                 else:
-                    handle_ecg_message(json.loads(data.decode())["ecg_record"])
+                    handle_ecg_message(json_data["ecg_record"])
     except Exception as e:
         print(f"An error occurred: {e}")
 
@@ -41,6 +44,9 @@ def handel_acl_message():
     from .models import Fallen
     fallen = Fallen(last_fallen_time=datetime.now())
     fallen.save()
+
+def handle_gps_message(payload):
+    gps = payload["gps"]
 
 def handle_ecg_message(payload):
     from .models import Record
