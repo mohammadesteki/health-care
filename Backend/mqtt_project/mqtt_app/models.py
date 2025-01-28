@@ -14,7 +14,7 @@ class PatientData(models.Model):
 
 class Record(models.Model):
     integer_field = models.IntegerField()
-    time_field = models.DateTimeField()
+    time_field = models.IntegerField()
 
     def __str__(self):
         return f"Record({self.integer_field}, {self.time_field})"

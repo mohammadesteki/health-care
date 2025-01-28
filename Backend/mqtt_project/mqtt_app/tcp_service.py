@@ -56,7 +56,7 @@ def handle_ecg_message(payload):
     print(payload)
     # print(int(float(payload.decode())))
     for item in payload:
-        timestamp = int(item["timestamp"])
+        timestamp = int(item["timestamp"])/1000
         value = item["value"]
         record = Record(integer_field=value, time_field=datetime.fromtimestamp(timestamp))
         record.save()
