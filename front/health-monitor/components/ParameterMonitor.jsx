@@ -126,7 +126,7 @@ export const ParameterMonitor = (props) => {
     const chartInstanceRef = useRef(null);
 
     const {data, isLoading, isError} = useQuery({
-        queryFn: () => getAPI('http://0.0.0.0:8000/ecg/', {
+        queryFn: () => getAPI('http://5.34.206.236:8000/ecg/', {
             method: 'GET',
         }),
         // todo: remove (enabled: false) to activate api calls
