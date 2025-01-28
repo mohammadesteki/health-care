@@ -5,7 +5,7 @@ from .models import Record
 def results(request):
     response = "You're looking at the results of ECG %s."
     latest_ecg_records = Record.objects.all().order_by('-time_field')[:50]
-    print()
+    print(response)
     records_data = [
         [
             record.integer_field,
