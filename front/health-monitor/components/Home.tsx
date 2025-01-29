@@ -8,8 +8,8 @@ import {Box, Divider, Typography} from "@mui/material";
 import Button from "@mui/material/Button";
 
 const coordinate = {
-    latitude: 35.699927,
-    longitude: 51.337762,
+    latitude: 35.7575556,
+    longitude: 51.3357222,
 };
 
 
@@ -31,8 +31,8 @@ const Home = () => {
             bloodPressure: 12,
             heartBeatRate: 75,
             center: {
-                latitude: 35.699927,
-                longitude: 51.337762,
+                latitude: 35.7575556,
+                longitude: 51.3357222,
             },
             name: 'Mohammad Esteki',
             age: 20,
