@@ -48,11 +48,6 @@ const Home = () => {
 
     // const { latitude, longitude } = getCenterCoordinates(data);
 
-    const renderMap = () => (
-        <Suspense fallback={null}>
-            <Map center={[longitude, latitude]} />
-        </Suspense>
-    );
 
     if(isLoading) {
         return (<div className={styles.container}>is loading...</div>);
@@ -74,9 +69,15 @@ const Home = () => {
                     <Typography>{'23'}</Typography>
                 </Box>
                 <Divider/>
-                <Box flexDirection="row" display={'flex'}  justifyContent={'center'} gap={1}>
-                    <Button variant={"outlined"} onClick={() => router.push('/heart')}>View More</Button>
-                </Box>
+                <iframe
+                    width="600"
+                    height="450"
+                    style={{border: 0}}
+                    loading="lazy"
+                    allowFullScreen
+                    referrerPolicy="no-referrer-when-downgrade"
+                    src={`https://www.google.com/maps/embed/v1/view?zoom=14&center=${latitude},${longitude}&key=YOUR_GOOGLE_MAPS_API_KEY`}
+                ></iframe>
             </Box>
             {renderMap()}
         </div>
