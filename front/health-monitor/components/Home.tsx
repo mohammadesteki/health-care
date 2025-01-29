@@ -79,7 +79,6 @@ const Home = () => {
                     src={`https://www.google.com/maps/embed/v1/view?zoom=14&center=${latitude},${longitude}&key=YOUR_GOOGLE_MAPS_API_KEY`}
                 ></iframe>
             </Box>
-            {renderMap()}
         </div>
     );
 }
