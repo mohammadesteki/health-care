@@ -48,7 +48,46 @@ def handel_acl_message():
     fallen.save()
 
 def handle_gps_message(payload):
-    gps = payload["gps"]
+    # Extract the GNRMC data from the payload
+    gnss_data = payload.split(': ')[1]
+    try:
+        # Split the GNRMC sentence into its components
+        parts = gnss_data.split(',')
+
+        # Ensure the sentence is valid and has the correct number of parts
+        if parts[2] == 'A':
+            # Latitude and Longitude in NMEA format
+            raw_latitude = parts[3]
+            lat_direction = parts[4]
+            raw_longitude = parts[5]
+            long_direction = parts[6]
+
+            # Convert latitude and longitude to decimal degrees
+            latitude = convert_to_decimal(raw_latitude, lat_direction)
+            longitude = convert_to_decimal(raw_longitude, long_direction)
+
+            # Here, you might want to handle storing or further processing this data
+            print(f"Extracted GPS coordinates: Latitude: {latitude}, Longitude: {longitude}")
+
+        else:
+            print("GPS data invalid or not available.")
+
+    except Exception as e:
+        print(f"An error occurred while processing GPS data: {e}")
+
+def convert_to_decimal(raw_coord, direction):
+    # Convert NMEA coordinates to decimal degrees
+    # Example: raw_coord = "3545.4559", direction = "N" or "S", "E" or "W"
+    degrees = float(raw_coord[:2])
+    minutes = float(raw_coord[2:])
+
+    decimal = degrees + (minutes / 60)
+
+    if direction in ['S', 'W']:
+        decimal *= -1
+
+    return decimal
+
 
 
 def handle_ecg_message(ecg_record):
