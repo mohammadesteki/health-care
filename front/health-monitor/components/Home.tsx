@@ -69,15 +69,17 @@ const Home = () => {
                     <Typography>{'23'}</Typography>
                 </Box>
                 <Divider/>
-                <iframe
-                    width="600"
-                    height="450"
-                    style={{border: 0}}
-                    loading="lazy"
-                    allowFullScreen
-                    referrerPolicy="no-referrer-when-downgrade"
-                    src={`https://www.google.com/maps?q=${latitude},${longitude}`}
-                ></iframe>
+                <Box marginTop={2} textAlign="center">
+                    <Typography>Click below to view the location on Google Maps:</Typography>
+                    <a
+                        href={`https://www.google.com/maps?q=${latitude},${longitude}`}
+                        target="_blank"
+                        rel="noopener noreferrer"
+                        style={{ color: 'blue', textDecoration: 'underline' }}
+                    >
+                        Open Location in Google Maps
+                    </a>
+                </Box>
             </Box>
         </div>
     );
