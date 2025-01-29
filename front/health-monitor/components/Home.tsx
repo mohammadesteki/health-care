@@ -19,7 +19,7 @@ const Map = dynamic(() => import('./Map').then(mod => mod.default), { ssr: false
 const Home = () => {
     const router = useRouter();
 
-    type GPSData = [number, number];
+    type GPSData = [number, number] | undefined;
 
     const { data, isLoading, isError } = useQuery<GPSData>({
         queryFn: () => getAPI('http://5.34.206.236:8000/gps/', {
@@ -31,17 +31,22 @@ const Home = () => {
         initialData: [35.7575556, 51.3357222]  // Initial data as a fallback
     });
 
-    const getCenterCoordinates = (data: [number, number]) => {
-        if (Array.isArray(data) && data.length === 2) {
-            return {
-                longitude: data[1],
-                latitude: data[0],
-            };
+    const getCenterCoordinates = (data: [number, number] | undefined) => {
+        if (!data) {
+            return { latitude: 35.7575556, longitude: 51.3357222 };  // Fallback when data is undefined
         }
-        return { latitude: 35.7575556, longitude: 51.3357222 };  // Fallback to initial data
+        const [latitude, longitude] = data;
+        return { latitude, longitude };
     };
 
-    const { latitude, longitude } = getCenterCoordinates(data);
+
+// Safely handle undefined data
+    const { latitude, longitude } = data ? getCenterCoordinates(data) : { latitude: 35.7575556, longitude: 51.3357222 };
+
+
+
+
+    // const { latitude, longitude } = getCenterCoordinates(data);
 
     const renderMap = () => (
         <Suspense fallback={null}>
