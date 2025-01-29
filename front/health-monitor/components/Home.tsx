@@ -76,7 +76,7 @@ const Home = () => {
                     loading="lazy"
                     allowFullScreen
                     referrerPolicy="no-referrer-when-downgrade"
-                    src={`https://www.google.com/maps/embed/v1/view?zoom=14&center=${latitude},${longitude}&key=YOUR_GOOGLE_MAPS_API_KEY`}
+                    src={`https://www.google.com/maps?q=${latitude},${longitude}`}
                 ></iframe>
             </Box>
         </div>
