@@ -22,7 +22,7 @@ const Home = () => {
     type GPSData = [number, number] | undefined;
 
     const { data, isLoading, isError } = useQuery<GPSData>({
-        queryFn: () => getAPI('http://5.34.206.236:8000/gps/', {
+        queryFn: () => getAPI('http://5.34.206.236:8000/ecg/gps/', {
             method: 'GET',
         }),
         enabled: true,  // Activate API calls
