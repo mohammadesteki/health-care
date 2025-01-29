@@ -67,21 +67,13 @@ const Home = () => {
             <Box width={'500px'} marginBottom={'20px'}>
                 <Box flexDirection="row" display={'flex'} justifyContent={'center'} gap={1}>
                     <Typography>Name:</Typography>
-                    <Typography>{data?.name || '?'}</Typography>
+                    <Typography>{'Mohammad'}</Typography>
                 </Box>
                 <Box flexDirection="row" display={'flex'} justifyContent={'center'} gap={1}  marginBottom={'10px'}>
                     <Typography>Age:</Typography>
-                    <Typography>{data?.age || '?'}</Typography>
+                    <Typography>{'23'}</Typography>
                 </Box>
                 <Divider/>
-                <Box flexDirection="row" display={'flex'} justifyContent={'center'} gap={1}  marginTop={'10px'}>
-                    <Typography>Blood Pressure:</Typography>
-                    <Typography>{data?.bloodPressure || '?'}</Typography>
-                </Box>
-                <Box flexDirection="row" display={'flex'}  justifyContent={'center'} gap={1}>
-                    <Typography>Heartbeat Rate:</Typography>
-                    <Typography>{data?.heartBeatRate || '?'}</Typography>
-                </Box>
                 <Box flexDirection="row" display={'flex'}  justifyContent={'center'} gap={1}>
                     <Button variant={"outlined"} onClick={() => router.push('/heart')}>View More</Button>
                 </Box>
