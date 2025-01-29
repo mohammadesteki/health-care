@@ -36,25 +36,41 @@ const Home = () => {
     //     }
     // })
 
-    const {data: centerData, isLoading: isCenLoading} = useQuery<{center: { latitude: number; longitude: number; }}>({
+    // const {data: centerData, isLoading: isCenLoading} = useQuery<{center: { latitude: number; longitude: number; }}>({
+    //     queryFn: () => getAPI('http://5.34.206.236:8000/gps/', {
+    //         method: 'GET',
+    //     }),
+    //     // todo: remove (enabled: false) to activate api calls
+    //     enabled: false,
+    //     refetchInterval: 20000,
+    //     onError: () => alert('Error in Fetching Center Data'),
+    //     initialData: {
+    //         center: {
+    //             latitude: 35.7575556,
+    //             longitude: 51.3357222,
+    //         },
+    //     }
+    // })
+    //
+    // const renderMap = () => isCenLoading ? 'loading...' : (
+    //     <Suspense fallback={null}>
+    //         <Map center={[centerData?.center?.longitude, centerData?.center?.latitude]}/>
+    //     </Suspense>
+    // );
+
+    const { data: centerData, isLoading, isError } = useQuery({
         queryFn: () => getAPI('http://5.34.206.236:8000/gps/', {
             method: 'GET',
         }),
-        // todo: remove (enabled: false) to activate api calls
-        enabled: false,
+        enabled: true,  // Enable the API call
         refetchInterval: 20000,
         onError: () => alert('Error in Fetching Center Data'),
-        initialData: {
-            center: {
-                latitude: 35.7575556,
-                longitude: 51.3357222,
-            },
-        }
-    })
+        initialData: [35.7575556, 51.3357222],  // Initial data structure as an array
+    });
 
-    const renderMap = () => isCenLoading ? 'loading...' : (
+    const renderMap = () => isLoading ? 'loading...' : (
         <Suspense fallback={null}>
-            <Map center={[centerData?.center?.longitude, centerData?.center?.latitude]}/>
+            <Map center={[centerData[0], centerData[1]]}/>  // Correctly pass latitude and longitude
         </Suspense>
     );
 
