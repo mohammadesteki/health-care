@@ -1,6 +1,7 @@
 from django.http import HttpResponse, JsonResponse
 
-from .models import Record
+from .models import Record, GPS
+
 
 def results(request):
     response = "You're looking at the results of ECG %s."
@@ -9,13 +10,21 @@ def results(request):
     records_data = [
         [
             record.integer_field,
-            record.time_field,  # Format `time_field` appropriately
+            record.time_field,
         ]
         for record in latest_ecg_records
     ]
-    # records_data = [
-    #     [100, 100], [200, 200]
-    # ]
+    return JsonResponse(records_data, safe=False)
+
+
+def gps_results(request):
+    response = "You're looking at the GPS results %s."
+    latest_gps_records = GPS.objects.all().order_by('-time_field')[:1]
+    print(response)
+    records_data = [
+        latest_gps_records[0].gps_latitude,
+        latest_gps_records[0].gps_longitude,
+    ]
     return JsonResponse(records_data, safe=False)
 
 # Create your views here.

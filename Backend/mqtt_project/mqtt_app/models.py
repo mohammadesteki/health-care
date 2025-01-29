@@ -20,7 +20,11 @@ class Record(models.Model):
         return f"Record({self.integer_field}, {self.time_field})"
 
 class Fallen(models.Model):
-    last_fallen_time = models.TimeField()
+    last_fallen_time = models.DateTimeField()
 
     def __str__(self):
         return f"Fallen({self.last_fallen_time})"
+
+class GPS(models.Model):
+    gps_latitude = models.FloatField()
+    gps_longitude = models.FloatField()

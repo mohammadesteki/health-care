@@ -2,6 +2,8 @@ import json
 import socket
 import threading
 from datetime import datetime
+from django.utils import timezone
+
 
 def handle_client(client_socket):
     """Handles client communication."""
@@ -42,11 +44,12 @@ def start_tcp_server(host='0.0.0.0', port=1234):
 
 def handel_acl_message():
     from .models import Fallen
-    fallen = Fallen(last_fallen_time=datetime.now())
+    fallen = Fallen(last_fallen_time=timezone.now())
     fallen.save()
 
 def handle_gps_message(payload):
     gps = payload["gps"]
+
 
 def handle_ecg_message(payload):
     from .models import Record
