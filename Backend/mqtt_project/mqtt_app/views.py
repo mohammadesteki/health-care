@@ -19,7 +19,7 @@ def results(request):
 
 def gps_results(request):
     response = "You're looking at the GPS results %s."
-    latest_gps_records = GPS.objects.all().order_by('-time_field')[:1]
+    latest_gps_records = GPS.objects.all().order_by('-id')[:1]
     print(response)
     records_data = [
         latest_gps_records[0].gps_latitude,
