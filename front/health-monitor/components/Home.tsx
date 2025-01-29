@@ -1,4 +1,3 @@
-// @ts-nocheck
 import dynamic from "next/dynamic";
 import styles from '../styles/Home.module.css';
 import { useQuery} from "react-query";
@@ -20,62 +19,34 @@ const Map = dynamic(() => import('./Map').then(mod => mod.default), { ssr: false
 const Home = () => {
     const router = useRouter();
 
-    // const {data, isLoading, isError} = useQuery({
-    //     queryFn: () => getAPI('//', {
-    //         method: 'GET',
-    //     }),
-    //     // todo: remove (enabled: false) to activate api calls
-    //     enabled: false,
-    //     refetchInterval: 2000,
-    //     // onError: () => alert('Error in Fetching Health Data'),
-    //     initialData: {
-    //         bloodPressure: 12,
-    //         heartBeatRate: 75,
-    //         name: 'Mohammad Esteki',
-    //         age: 20,
-    //     }
-    // })
-
-    // const {data: centerData, isLoading: isCenLoading} = useQuery<{center: { latitude: number; longitude: number; }}>({
-    //     queryFn: () => getAPI('http://5.34.206.236:8000/gps/', {
-    //         method: 'GET',
-    //     }),
-    //     // todo: remove (enabled: false) to activate api calls
-    //     enabled: false,
-    //     refetchInterval: 20000,
-    //     onError: () => alert('Error in Fetching Center Data'),
-    //     initialData: {
-    //         center: {
-    //             latitude: 35.7575556,
-    //             longitude: 51.3357222,
-    //         },
-    //     }
-    // })
-    //
-    // const renderMap = () => isCenLoading ? 'loading...' : (
-    //     <Suspense fallback={null}>
-    //         <Map center={[centerData?.center?.longitude, centerData?.center?.latitude]}/>
-    //     </Suspense>
-    // );
-
-    const { data: centerData, isLoading, isError } = useQuery({
-        queryFn: () => getAPI('http://5.34.206.236:8000/gps/', {
+    const {data, isLoading, isError} = useQuery({
+        queryFn: () => getAPI('//', {
             method: 'GET',
         }),
-        enabled: true,  // Enable the API call
-        refetchInterval: 20000,
-        onError: () => alert('Error in Fetching Center Data'),
-        initialData: [35.7575556, 51.3357222],  // Initial data structure as an array
-    });
+        // todo: remove (enabled: false) to activate api calls
+        enabled: false,
+        refetchInterval: 2000,
+        // onError: () => alert('Error in Fetching Health Data'),
+        initialData: {
+            bloodPressure: 12,
+            heartBeatRate: 75,
+            center: {
+                latitude: 35.699927,
+                longitude: 51.337762,
+            },
+            name: 'Mohammad Esteki',
+            age: 20,
+        }
+    })
 
-    const renderMap = () => isLoading ? 'loading...' : (
+    const renderMap = () => (
         <Suspense fallback={null}>
-            <Map center={[centerData[0], centerData[1]]}/>  // Correctly pass latitude and longitude
+            <Map center={[data?.center?.longitude, data?.center?.latitude]}/>
         </Suspense>
     );
 
     if(isLoading) {
-         return (<div className={styles.container}>is loading...</div>);
+        return (<div className={styles.container}>is loading...</div>);
     }
 
     if(isError) {
