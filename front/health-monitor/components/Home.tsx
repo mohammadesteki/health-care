@@ -19,17 +19,19 @@ const Map = dynamic(() => import('./Map').then(mod => mod.default), { ssr: false
 const Home = () => {
     const router = useRouter();
 
-    const { data, isLoading, isError } = useQuery({
+    type GPSData = [number, number];
+
+    const { data, isLoading, isError } = useQuery<GPSData>({
         queryFn: () => getAPI('http://5.34.206.236:8000/gps/', {
             method: 'GET',
         }),
         enabled: true,  // Activate API calls
         refetchInterval: 2000,
         onError: () => alert('Error in Fetching GPS Data'),
-        initialData: [35.7575556, 51.3357222]  // Initial data as an array
+        initialData: [35.7575556, 51.3357222]  // Initial data as a fallback
     });
 
-    const getCenterCoordinates = (data) => {
+    const getCenterCoordinates = (data: [number, number]) => {
         if (Array.isArray(data) && data.length === 2) {
             return {
                 longitude: data[1],
