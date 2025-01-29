@@ -27,7 +27,7 @@ DEBUG = True
 
 ALLOWED_HOSTS = ["0.0.0.0", "5.34.206.236"]
 
-
+DATA_UPLOAD_MAX_NUMBER_FIELDS = 100000
 # Application definition
 
 INSTALLED_APPS = [

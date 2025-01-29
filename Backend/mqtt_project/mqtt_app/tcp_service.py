@@ -23,7 +23,7 @@ def handle_client(client_socket):
                 elif "location" in json_data:
                     handle_gps_message(json_data["location"])
 
-                else:
+                elif "ecg_record" in json_data:
                     handle_ecg_message(json_data["ecg_record"])
     except Exception as e:
         print(f"An error occurred: {e}")
@@ -51,17 +51,15 @@ def handle_gps_message(payload):
     gps = payload["gps"]
 
 
-def handle_ecg_message(payload):
+def handle_ecg_message(ecg_record):
     from .models import Record
     # print(payload.decode())
     # print(json.loads(payload.decode()))
     # rec = json.loads(payload.decode())["value"]
-    print(payload)
+    print(ecg_record)
     # print(int(float(payload.decode())))
-    for item in payload:
-        timestamp = int(item["timestamp"])
-        value = item["value"]
-        record = Record(integer_field=value, time_field=datetime.fromtimestamp(timestamp))
+    for value in ecg_record:
+        record = Record(integer_field=value, time_field=timezone.now())
         record.save()
 
 if __name__ == "__main__":
