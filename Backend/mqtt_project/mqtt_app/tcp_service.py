@@ -9,7 +9,7 @@ def handle_client(client_socket):
     print("Connection established.")
     try:
         while True:
-            data = client_socket.recv(1048576)
+            data = client_socket.recv(2048)
             if not data:
                 # If no data is received, it means the client closed the connection.
                 print("Client disconnected.")
@@ -44,7 +44,7 @@ def handle_client(client_socket):
 def start_tcp_server(host='0.0.0.0', port=1234):
     """Starts the TCP server."""
     with socket.socket(socket.AF_INET, socket.SOCK_STREAM) as server_socket:
-        server_socket.setsockopt(socket.SOL_SOCKET, socket.SO_REUSEADDR, 1)
+        server_socket.setsockopt(socket.SOL_SOCKET, socket.SO_KEEPALIVE, 1)
         server_socket.bind((host, port))
         server_socket.listen(5)
         print(f"Listening for TCP connections on {host}:{port}...")
