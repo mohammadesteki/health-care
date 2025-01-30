@@ -82,6 +82,9 @@ def handle_gps_message(payload):
             # Convert latitude and longitude to decimal degrees
             latitude = convert_to_decimal(raw_latitude, lat_direction)
             longitude = convert_to_decimal(raw_longitude, long_direction)
+            from .models import GPS
+
+            GPS(gps_latitude=latitude, gps_longitude=longitude).save()
 
             # Here, you might want to handle storing or further processing this data
             print(f"Extracted GPS coordinates: Latitude: {latitude}, Longitude: {longitude}")
