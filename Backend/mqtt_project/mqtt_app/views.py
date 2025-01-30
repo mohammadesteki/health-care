@@ -10,7 +10,7 @@ def results(request):
     records_data = [
         [
             record.integer_field,
-            record.time_field,
+            record.id,
         ]
         for record in latest_ecg_records
     ]
