@@ -68,6 +68,9 @@ const Home = () => {
                     <Typography>Age:</Typography>
                     <Typography>{'23'}</Typography>
                 </Box>
+                <Box flexDirection="row" display={'flex'}  justifyContent={'center'} gap={1}>
+                    <Button variant={"outlined"} onClick={() => router.push('/heart')}>View More</Button>
+                </Box>
                 <Divider/>
                 <Box marginTop={2} textAlign="center">
                     <Typography>Click below to view the location on Google Maps:</Typography>
