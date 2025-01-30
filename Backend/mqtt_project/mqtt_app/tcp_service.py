@@ -6,13 +6,11 @@ from django.utils import timezone
 
 
 def handle_client(client_socket):
-    client_socket.setsockopt(socket.SOL_SOCKET, socket.SO_KEEPALIVE, 1)
-    client_socket.settimeout(60)  # Allow more time for processing
     print("Connection established.")
     try:
         while True:
-
-
+            client_socket.setsockopt(socket.SOL_SOCKET, socket.SO_KEEPALIVE, 1)
+            client_socket.settimeout(60)  # Allow more time for processing
             data = client_socket.recv(1024)
             if not data:
                 # If no data is received, it means the client closed the connection.
