@@ -99,7 +99,7 @@ def convert_to_decimal(raw_coord, direction):
     # Convert NMEA coordinates to decimal degrees
     # Example: raw_coord = "3545.4559", direction = "N" or "S", "E" or "W"
     degrees = float(raw_coord[:2])
-    minutes = float(raw_coord[2:])
+    minutes = float(raw_coord[1:3])
 
     decimal = degrees + (minutes / 60)
 
