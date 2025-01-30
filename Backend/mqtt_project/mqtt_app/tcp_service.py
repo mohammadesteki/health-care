@@ -9,7 +9,7 @@ def handle_client(client_socket):
     print("Connection established.")
     try:
         while True:
-            data = client_socket.recv(2048)
+            data = client_socket.recv(1024)
             if not data:
                 # If no data is received, it means the client closed the connection.
                 print("Client disconnected.")
@@ -20,7 +20,9 @@ def handle_client(client_socket):
             print(f"Received: {data.decode('utf-8')}")
 
             try:
-                json_data = json.loads(data.decode('utf-8'))
+                decoded_data = data.decode('utf-8')
+                safe_data = decoded_data.replace("\r", "").replace("\n", "")
+                json_data = json.loads(safe_data.decode('utf-8'))
                 print(json_data)
 
                 if "has_fallen" in json_data:
