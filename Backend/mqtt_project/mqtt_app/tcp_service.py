@@ -6,11 +6,10 @@ from django.utils import timezone
 
 
 def handle_client(client_socket):
+    client_socket.setsockopt(socket.SOL_SOCKET, socket.SO_KEEPALIVE, 1)
     print("Connection established.")
     try:
         while True:
-            client_socket.setsockopt(socket.SOL_SOCKET, socket.SO_KEEPALIVE, 1)
-            client_socket.settimeout(120)  # Allow more time for processing
             data = client_socket.recv(1024)
             if not data:
                 # If no data is received, it means the client closed the connection.
@@ -24,7 +23,7 @@ def handle_client(client_socket):
             try:
                 decoded_data = data.decode('utf-8')
                 safe_data = decoded_data.replace("\r", "").replace("\n", "")
-                json_data = json.loads(safe_data.decode('utf-8'))
+                json_data = json.loads(safe_data)
                 print(json_data)
 
                 if "has_fallen" in json_data:
