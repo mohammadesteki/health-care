@@ -80,6 +80,7 @@ def handle_gps_message(payload):
             long_direction = parts[6]
 
             # Convert latitude and longitude to decimal degrees
+            print(f"{raw_latitude}, {lat_direction}, {raw_longitude}, {long_direction}")
             latitude = convert_to_decimal(raw_latitude, lat_direction)
             longitude = convert_to_decimal(raw_longitude, long_direction)
             from .models import GPS
