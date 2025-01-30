@@ -118,7 +118,7 @@ def handle_ecg_message(ecg_record):
     print(ecg_record)
     # print(int(float(payload.decode())))
     for value in ecg_record:
-        record = Record(integer_field=value, time_field=timezone.now())
+        record = Record(integer_field=value)
         print(record)
         record.save()
 

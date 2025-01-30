@@ -14,10 +14,9 @@ class PatientData(models.Model):
 
 class Record(models.Model):
     integer_field = models.IntegerField()
-    time_field = models.IntegerField()
 
     def __str__(self):
-        return f"Record({self.integer_field}, {self.time_field})"
+        return f"Record({self.integer_field})"
 
 class Fallen(models.Model):
     last_fallen_time = models.DateTimeField()
