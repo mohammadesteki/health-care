@@ -6,17 +6,23 @@ from django.utils import timezone
 
 
 def handle_client(client_socket):
-    """Handles client communication."""
+    print("Connection established.")
     try:
-        with client_socket:
-            print("Connection established.")
+        while True:
             data = client_socket.recv(1048576)
-            if data:
-                print(data)
-                print(len(data))
-                print(f"Received: {data.decode('utf-8')}")
-                json_data = json.loads(str(data.decode('utf-8')))
+            if not data:
+                # If no data is received, it means the client closed the connection.
+                print("Client disconnected.")
+                break
+
+            print(data)
+            print(len(data))
+            print(f"Received: {data.decode('utf-8')}")
+
+            try:
+                json_data = json.loads(data.decode('utf-8'))
                 print(json_data)
+
                 if "has_fallen" in json_data:
                     handel_acl_message()
 
@@ -25,12 +31,20 @@ def handle_client(client_socket):
 
                 elif "ecg_record" in json_data:
                     handle_ecg_message(json_data["ecg_record"])
+
+            except json.JSONDecodeError as e:
+                print(f"JSON decoding error: {e}")
+
     except Exception as e:
         print(f"An error occurred: {e}")
+
+    finally:
+        client_socket.close()
 
 def start_tcp_server(host='0.0.0.0', port=1234):
     """Starts the TCP server."""
     with socket.socket(socket.AF_INET, socket.SOCK_STREAM) as server_socket:
+        server_socket.setsockopt(socket.SOL_SOCKET, socket.SO_REUSEADDR, 1)
         server_socket.bind((host, port))
         server_socket.listen(5)
         print(f"Listening for TCP connections on {host}:{port}...")
