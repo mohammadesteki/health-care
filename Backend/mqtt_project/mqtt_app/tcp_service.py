@@ -11,7 +11,7 @@ def handle_client(client_socket):
         while True:
             client_socket.setsockopt(socket.SOL_SOCKET, socket.SO_KEEPALIVE, 1)
             client_socket.settimeout(60)  # Allow more time for processing
-            data = client_socket.recv(1024)
+            data = client_socket.recv(512)
             if not data:
                 # If no data is received, it means the client closed the connection.
                 print("Client disconnected.")
