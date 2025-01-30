@@ -45,7 +45,7 @@ def handle_client(client_socket):
     finally:
         client_socket.close()
 
-def start_tcp_server(host='0.0.0.0', port=1234):
+def start_tcp_server(host='0.0.0.0', port=12345):
     """Starts the TCP server."""
     with socket.socket(socket.AF_INET, socket.SOCK_STREAM) as server_socket:
         server_socket.setsockopt(socket.SOL_SOCKET, socket.SO_KEEPALIVE, 1)
