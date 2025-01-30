@@ -6,9 +6,13 @@ from django.utils import timezone
 
 
 def handle_client(client_socket):
+    client_socket.setsockopt(socket.SOL_SOCKET, socket.SO_KEEPALIVE, 1)
+    client_socket.settimeout(60)  # Allow more time for processing
     print("Connection established.")
     try:
         while True:
+
+
             data = client_socket.recv(1024)
             if not data:
                 # If no data is received, it means the client closed the connection.
@@ -47,7 +51,6 @@ def start_tcp_server(host='0.0.0.0', port=1234):
     """Starts the TCP server."""
     with socket.socket(socket.AF_INET, socket.SOCK_STREAM) as server_socket:
         server_socket.setsockopt(socket.SOL_SOCKET, socket.SO_KEEPALIVE, 1)
-        client_socket.settimeout(60)  # Allow more time for processing
         server_socket.bind((host, port))
         server_socket.listen(5)
         print(f"Listening for TCP connections on {host}:{port}...")
