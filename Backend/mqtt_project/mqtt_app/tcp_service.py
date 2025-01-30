@@ -98,6 +98,7 @@ def handle_gps_message(payload):
 def convert_to_decimal(raw_coord, direction):
     # Convert NMEA coordinates to decimal degrees
     # Example: raw_coord = "3545.4559", direction = "N" or "S", "E" or "W"
+    print(f"Converting {raw_coord} and {direction}")
     raw_coord = raw_coord[:4]
     degrees = float(raw_coord[:2])
     minutes = float(raw_coord[2:])
